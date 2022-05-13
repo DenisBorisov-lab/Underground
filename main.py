@@ -55,22 +55,24 @@ class Train:
     async def get_to_next_station(self):
         if self.to_the_right:
             # await asyncio.sleep(right_time_motion[self.location])
-            for _ in range(len(right_time_motion)):
-                self.spaces += 1
-                await asyncio.sleep(minute)
             if self.location == 4:
                 self.change_direction()
             else:
+                for _ in range(len(right_time_motion)):
+                    self.spaces += 1
+                    await asyncio.sleep(minute)
+
                 self.location += 1
                 self.spaces += 1
+
         else:
             # await asyncio.sleep(left_time_motion[4 - self.location])
-            for _ in range(len(left_time_motion)):
-                self.spaces -= 1
-                await asyncio.sleep(minute)
             if self.location == 0:
                 self.change_direction()
             else:
+                for _ in range(len(left_time_motion)):
+                    self.spaces -= 1
+                    await asyncio.sleep(minute)
                 self.location -= 1
                 self.spaces -= 1
 
@@ -106,7 +108,7 @@ stations = [Station("Рокоссовская", 0),
             Station("Заречная", 3),
             Station("Библиотека им. Пушкина", 4)]
 
-right_time_motion = [6, 3 , 2 , 7 , 0]
+right_time_motion = [6, 3, 2, 7, 0]
 left_time_motion = list(reversed(right_time_motion))
 time_to_drop_passengers = minute * 0.25
 
